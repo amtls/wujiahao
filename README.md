@@ -38,7 +38,7 @@
 #### Detecting Text in Fine-scale proposals（选择出 anchor， 也就是待选的”矩形微分框“）
 > 和  faster-rcnn 中的 RPN 的主要区别在于引入了”微分“思想，将我们的的候选区域 切成长条形的框来进行处理。k 个 anchor（也就是 k 个待选的长条预选区域）的设置如 下：宽度都是 16 像素，高度从 11~273 像素变化（每次乘以 1.4），也就是说 k 的值设定为 10。最后结果如下： 
 
-![ "微分"示意图]('http://note.youdao.com/noteshare?id=8807c01f37437e252272dbb570c2f065')
+![ "微分"示意图](https://github.com/amtls/MyImages/blob/master/%E5%9B%BE%E7%89%871.jpg?raw=true)
 #### Recurrent Connectionist Text Proposals（双向 LSTM，利 用上下文本信息的 RNN 过程）
 > 本文使用的方法回归出来的 y 轴坐标结果如下： 
 
@@ -52,16 +52,16 @@ $$v^*_h = log(h^*/h^a)$$
 >其中标记*的表示为真值； v = {vc,vh } 表示一个预测的框选位置，因为长度固定（之前确定的16像素），vc表示的是该预选框在y轴上的中心位置，vh表示这个预选框的高度。 
 > 其方法对应的就是之前流程中的”双向LSTM“对应的细节，将前后文的信息用到 文本位置的定位当中。其中BLSTM有128个隐含层。输入为3*3*C滑动窗口的feature，输 出为每个窗口所对应的256维的特征。简要表示如下:
 
-![Diagram](./attachments/1560521363253.drawio.html)
+![Diagram](https://github.com/amtls/MyImages/blob/master/%E8%BE%93%E5%85%A5%E5%92%8C%E8%BE%93%E5%87%BA.png?raw=true)
 
 #### Side-refinement（文本构造，将多个 proposal 合并成直 线）
 >先进行文本位置的构造，Side-refinement是最后进行优化的方法。对定位出来的 “小矩形框”加以合并和归纳，可以得到需要的文本信息的位置信息。我们最后保留的 小矩形框是需要score>0.7的情况，也就是将下图中的红色小矩形框合并，最后生成黄色 的大矩形框
 >
-![小区域分割示意图](./images/图片2_1.jpg)
+![小区域分割示意图](https://github.com/amtls/MyImages/blob/master/%E5%9B%BE%E7%89%872.jpg?raw=true)
 >主要的思路为：每两个相近的proposal（也就是候选区）组成一个 pair，合并不同
 的 pair直到无法再合并为止。而判断两个proposal,Bi和Bj可以组成一个pair的条件为Bi—  >Bj,同时Bj—>Bi;该符号的判定条件见下图。
 
-![Diagram](./attachments/1560521828936.drawio.html)
+![Diagram](https://github.com/amtls/MyImages/blob/master/%E5%8F%AF%E5%90%88%E5%B9%B6%E5%8C%BA%E5%9F%9F.png?raw=true)
 >因为这里规定了回归出来的box的宽度是16个像素，所以会导致一些位置上的误 差，这时候就是Side-refinement发挥作用的时候 了。定义的式子如下： 
 
 $$O = (x_{side} -c^a_x)/w^a$$
@@ -75,14 +75,14 @@ $$o^*=(x^*_{side})/w^a$$
 ·接着针对LSTM，设置 T=(W/4) ， D=512 ，即可将特征输入LSTM。
 ·LSTM有256个隐藏节点，经过LSTM后变为长度为T × nclass的向量，再经过softmax处理，列向量每个元素代表对应的字符预测概·率，最后再将这个T的预测结果去冗余合并成一个完整识别结果即可。
 
-![enter description here](./images/未标题-2.jpg)
+![enter description here]()
 #### 网络结构：
-![RCNN网络结构](./images/未标题-1.jpg)
+![RCNN网络结构](https://github.com/amtls/MyImages/blob/master/%E6%9C%AA%E6%A0%87%E9%A2%98-2.jpg?raw=true)
 >1.卷积层，使用CNN，作用是从输入图像中提取特征序列;
 2.循环层，使用RNN，作用是预测从卷积层获取的特征序列的标签（真实值）分布;
 3.转录层，使用CTC，作用是把从循环层获取的标签分布通过去重整合等操作转换成最终的识别结果;
 
-![enter description here](./images/未标题-2.jpg)
+![enter description here](https://github.com/amtls/MyImages/blob/master/%E6%9C%AA%E6%A0%87%E9%A2%98-1.jpg?raw=true)
 ## 项目中卡号定位与卡号识别结果说明
 >大赛资料图片测试结果
 
