@@ -38,7 +38,7 @@
 #### Detecting Text in Fine-scale proposals（选择出 anchor， 也就是待选的”矩形微分框“）
 > 和  faster-rcnn 中的 RPN 的主要区别在于引入了”微分“思想，将我们的的候选区域 切成长条形的框来进行处理。k 个 anchor（也就是 k 个待选的长条预选区域）的设置如 下：宽度都是 16 像素，高度从 11~273 像素变化（每次乘以 1.4），也就是说 k 的值设定为 10。最后结果如下： 
 
-![ "微分"示意图](./images/图片1_1.jpg)
+![ "微分"示意图]('http://note.youdao.com/noteshare?id=8807c01f37437e252272dbb570c2f065')
 #### Recurrent Connectionist Text Proposals（双向 LSTM，利 用上下文本信息的 RNN 过程）
 > 本文使用的方法回归出来的 y 轴坐标结果如下： 
 
