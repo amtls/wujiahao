@@ -75,19 +75,20 @@ $$o^*=(x^*_{side})/w^a$$
 ·接着针对LSTM，设置 T=(W/4) ， D=512 ，即可将特征输入LSTM。
 ·LSTM有256个隐藏节点，经过LSTM后变为长度为T × nclass的向量，再经过softmax处理，列向量每个元素代表对应的字符预测概·率，最后再将这个T的预测结果去冗余合并成一个完整识别结果即可。
 
-![enter description here]()
+
 #### 网络结构：
 ![RCNN网络结构](https://github.com/amtls/MyImages/blob/master/%E6%9C%AA%E6%A0%87%E9%A2%98-2.jpg?raw=true)
 >1.卷积层，使用CNN，作用是从输入图像中提取特征序列;
 2.循环层，使用RNN，作用是预测从卷积层获取的特征序列的标签（真实值）分布;
 3.转录层，使用CTC，作用是把从循环层获取的标签分布通过去重整合等操作转换成最终的识别结果;
 
-![enter description here](https://github.com/amtls/MyImages/blob/master/%E6%9C%AA%E6%A0%87%E9%A2%98-1.jpg?raw=true)
+![crnn识别流程](https://github.com/amtls/MyImages/blob/master/%E6%9C%AA%E6%A0%87%E9%A2%98-1.jpg?raw=true)
 ## 项目中卡号定位与卡号识别结果说明
->大赛资料图片测试结果
 
+![大赛资料图片测试](https://github.com/amtls/MyImages/blob/master/%E6%B5%8B%E8%AF%951.jpg?raw=true)
 
->额外图片测试结果
+![大赛资料图片测试](https://github.com/amtls/MyImages/blob/master/%E6%B5%8B%E8%AF%952.png?raw=true)
+
 ## 项目代码介绍文档
 ##### 项目部署
 >bank_card_ocr
